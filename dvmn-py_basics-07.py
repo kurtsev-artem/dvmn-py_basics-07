@@ -30,6 +30,9 @@ def reply(chat_id, question):
 def notify(secs_left, chat_id, message_id):
     bot.update_message(chat_id,message_id ,"Осталось {} секунд!\n {}".format(secs_left,render_progressbar(timeout, timeout - secs_left))  )
 
-bot = ptbot.Bot(TG_TOKEN)
-bot.reply_on_message(reply)  
-bot.run_bot()
+def main():    
+    bot.reply_on_message(reply)  
+    bot.run_bot()
+
+if __name__ == '__main__':
+    main()    
