@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 TIMEOUT = 5
 
 
-
 def answer_timeout(chat_id):
     bot.send_message(chat_id, "Время вышло")
     
