@@ -1,15 +1,9 @@
 import ptbot
 import os
-import random
 from dotenv import load_dotenv
-from pytimeparse import parse
-load_dotenv()
 
+TIMEOUT = 5
 
-TG_TOKEN = os.getenv('TG_TOKEN')
-TG_CHAT_ID = os.getenv('TG_CHAT_ID')
-bot = ptbot.Bot(TG_TOKEN)
-timeout = 5
 
 
 def answer_timeout(chat_id):
@@ -27,12 +21,12 @@ def render_progressbar(total, iteration, prefix='', suffix='', length=30, fill='
 
 def reply(chat_id,question):
     message_id =  bot.send_message(chat_id, "Запускаю таймер...")
-    bot.create_countdown(timeout, notify, chat_id=chat_id,message_id=message_id)
-    bot.create_timer(timeout, answer_timeout, chat_id=chat_id)
+    bot.create_countdown(TIMEOUT, notify, chat_id=chat_id,message_id=message_id)
+    bot.create_timer(TIMEOUT, answer_timeout, chat_id=chat_id)
     
 
 def notify(secs_left, chat_id, message_id):
-    bot.update_message(chat_id,message_id ,"Осталось {} секунд!\n {}".format(secs_left,render_progressbar(timeout, timeout - secs_left))  )
+    bot.update_message(chat_id,message_id ,"Осталось {} секунд!\n {}".format(secs_left,render_progressbar(TIMEOUT, TIMEOUT - secs_left))  )
     
 
 def main():    
@@ -41,4 +35,7 @@ def main():
     
 
 if __name__ == '__main__':
+    load_dotenv()
+    TG_TOKEN = os.getenv('TG_TOKEN')
+    bot = ptbot.Bot(TG_TOKEN)
     main()    
