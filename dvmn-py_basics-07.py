@@ -28,13 +28,13 @@ def notify(secs_left, chat_id, message_id):
     bot.update_message(chat_id,message_id ,"Осталось {} секунд!\n {}".format(secs_left,render_progressbar(TIMEOUT, TIMEOUT - secs_left))  )
     
 
-def main():    
+def main():
+    load_dotenv()
+    TG_TOKEN = os.getenv('TG_TOKEN')
+    bot = ptbot.Bot(TG_TOKEN)
     bot.reply_on_message(reply)  
     bot.run_bot()
     
 
 if __name__ == '__main__':
-    load_dotenv()
-    TG_TOKEN = os.getenv('TG_TOKEN')
-    bot = ptbot.Bot(TG_TOKEN)
     main()    
